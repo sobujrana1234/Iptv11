@@ -1,0 +1,21 @@
+# Decode keystore and create keystore properties for Gradle
+- name: Decode release keystore
+  run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.jks
+
+- name: Create keystore properties
+  run: |
+    cat > app/keystore.properties <<EOF
+    storeFile=../release.jks
+    storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+    keyAlias=${{ secrets.KEY_ALIAS }}
+    keyPassword=${{ secrets.KEY_PASSWORD }}
+    EOF
+
+# Build release
+- run: ./gradlew assembleRelease
+
+# Upload release artifact
+- uses: actions/upload-artifact@v4
+  with:
+    name: app-release
+    path: app/build/outputs/apk/release/*.apk
