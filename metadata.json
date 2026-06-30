@@ -1,0 +1,6 @@
+{
+  "name": "NEKBD IPTV",
+  "description": "Complete Dual App System with an ultra-premium sports-themed user interface and a comprehensive administrator control panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
